@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage{hyperref}
+
+\usepackage{float}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{amsfonts}
+\usepackage{verbatim}
+
+\usepackage{csvsimple}
+\usepackage{todonotes}
+
+\renewcommand \UrlFont{\color{blue}\rmfamily}
+\newcommand{\doi}[1]{\url{http://doi.org/#1}}
+
+\DeclareMathOperator{\nt}{nt}
+\DeclareMathOperator{\tdeg}{tdeg}
+
+
+\usepackage{graphicx}
+\graphicspath{{art/}}
+
+
+
+
+\begin{document}
+\title{Attempt to count descents in teleporting parking functions $(n,n-1)$}
+\author{Tereso del Río}
+\section{Basic ideas}
+
+For counting the descents in TP(n,n-1), I will count the descents for the TP(n,n-1) that end up with the k+1th car occupying the nth position, or equivalently, the TP(n,n-1) that have the first n in the k+1th position or that there will be k numbers before the first n. From now on, whenever I speak of a teleporting parking functions I mean TP(n,n-1).
+
+The part before the first n will consist of a k ordered numbers between 1 and n. It is very easy to count the number of descents here, in the same way descents are counted in permutations. 
+
+
+\section{Alternative description of $TP(n,n-1)$}
+
+As you explained me the possibilities that end up in a given permutation can be found allowing the substitution of the minimums after the first $n$ by $n$.
+
+We can group the teleporting parking functions in relation with the permutation they can be generated from.
+
+For example the TP(6,5) that can be built from the permutation 316254 are 316254, 316256, 316654 and 316656.
+
+Moreover, in this process the numbers before the first $n$ don't interact at all with the numbers after it, so we might as well substitute the numbers by their position in their group.
+
+For example, the permutation 316254 can be changed to 216132 and the number and shape of the teleporting functions generated from it will not change, now it would be 216132, 216632, 216136 and 216636.
+
+Therefore, the number of total descents before the first $n$ in tel park functs coming from a permutation with the $n$ in the $k^{th}$ position is $(k-1)$ times the average number of tel park functs that permutations with the $n$ in the $k^{th}$ generate.
+
+And for the rest of the descents we should count the number of descents in the teleporting parking functions of length $m$ that are generated from a permutation starting with $m$. In particular, here we will use $m=n-k+1$.
+
+\section{Counting the average number of descents in the teleporting parking functions that can be generated from a permutation}
+
+Let's denote $d(n)$ the total number of descents in $TP(n,n-1)$ (the teleporting parking functions of length $n$ that can teleport $n-1$).
+
+Given a permutation $\alpha$ we will denote by $b(\alpha)$ the number of descents in the teleporting parking functions that can be generated from it. 
+
+We will try to compute $a(n)$, the average of $b(\alpha)$ where $\alpha$ is a permutations of length $n$. Note that $d(n)=a(n)*n!$
+
+To compute $a(n)$ we will compute $a_k(n)$ that is the average of $b(\alpha)$ where $\alpha$ is a permutations of length $n$ and have an $n$ in the $k^{th}$ position (counting positions starts with 0).
+
+Each of this $a_k(n)$ can be computed as the sum of the average number of descents that happen before the $k^{th}$ position and the ones that happen after.
+
+O
+
+$x(n)$ the average number of descents in the teleporting parking functions that can be generated from a permutation starting with $n$ have.
+
+For example, the number of descents that the teleporting parking functions associated with 316254 have after the first 6 is 6 (represented by points 316.25.4, 316.256, 3166.5.4 and 3166.56)
+
+The reason I used n-k is because this way we can also define $x(n)$ as the number of average descents in teleporting parking functions that start with n.
+
+I will denote by $t(n-k)$ the average number of teleporting parking functions that exist that finish in a given permutation with k numbers before the first n. It turns out that $t(n)=n$
+
+For example, given 316254 there are 4 teleporting parking functions that end up in this permutation, for 316245 there are 8, for 316425 there are 4, for 316452 there are 2, for 316524 there are 4 and for 316542 there are two. Making an average of 4, and it is easy to see that by changing the first two numbers this average won't change, so overall this average is 4.
+
+Given this I claim that the average number of descents in TP(n,n-1) that each permutation that has the biggest number in the $(k+1)$ position is generates is
+$$
+\max(k-1,0)(n-k) + x(n-k).
+$$
+
+Given this I claim that the number of descents in TP(n,n-1) is 
+\begin{equation}\label{total_descents}
+    (n-1)!\sum_{k=0}^{n-1} \max(k-1,0)(n-k) + x(n-k).
+\end{equation}
+
+The $(n-1)!$ corresponds to all the possible permutations after fixing the n in the k+1th place. The first part of the sum corresponds to the descents before the n and the second part to the rest of the descents.
+
+\section{Computing $z(n)$}
+
+$z(n)$ is the average number (per permutation of $n$ numbers) of lists that can be generated by substituting in the permutations some of the numbers that are smaller than all the numbers they have to the right by a number that is bigger than all of them.
+
+Mathematically, it is the average in the permutations of $2^m$, where $m$ is the number of numbers in the permutation that are smaller than all the numbers they have to the right.
+
+Turns out that $z(n)=n+1$.
+
+This can be seen by induction. Given a list of $n+1$ distinct numbers the probability of the biggest being smaller than all the numbers on its right is $1/(n+1)$, and in this cases will contribute $2z(n)$ while the rest will only contribute $z(n)$. 
+
+$z(n+1)=\frac{n}{n+1}z(n)+\frac{1}{n+1}2z(n)=n+2$.
+
+
+\section{How to compute $x(n)$}
+
+$x(n)$ as the number of average descents in teleporting parking functions that start with n coming from a permutation of the first $n$ numbers.
+
+$$x(0) = 0,$$
+and for $n>0$
+$$x(n)= (n-1) + x(n-1)/(n-1) + y(n-1).$$
+
+The permutation is a TP(n,n-1) and will clearly have a descent in between the first and the second number. Furthermore, the average number of times that this descent will be counted in TP(n,n-1) that come from a permutation is exactly $z(n-2)=n-1$.
+
+Also, with probability $1/(n-1)$ (the probability of having the smallest number first after $n$) the number of descents that will come when changing this number to $n$ is $x(n-1)$. 
+
+Finally, to count the descents (without counting the first one) when the second number is not changed is $y(n)$.
+
+
+Where $y(n):=$ Average in the possible permutations of $n$ natural numbers of the number of descents that are on all the sequences that can be generated substituting the minimum for a number bigger than all of them.
+
+For example, given the permutation of four numbers 3154 the number of descents of all the sequences that can be generated substituting the minimum for a number bigger than all of them is: 3.15.4, 3.156, 36.5.4, 36.56. So there are 6 descents in this case.
+
+\section{How to compute $y(n)$}
+
+$$y(0) = y(1) = 0,$$
+and for $n>1$
+$$y(n) = \frac{x(n)}{n} + y(n-1) + \frac{1}{2} t(n-2)$$
+
+The first is again the probability argument of having the minimum at the beginning. The second is given that the first number is not changed then what are the descents in the rest of it. And finally is one half because that's the probability of the first one being bigger than the second one, times the number of times that descent will appear counting when the numbers are changed.
+
+\section{End of the proof}
+
+$$x(0) = 0,$$
+and
+$$y(0) = y(1) = 0.$$
+
+Doing a double induction on the formulas 
+$$x(n)= (n-1) + x(n-1)/(n-1) + y(n-1),$$
+and
+$$y(n) = \frac{x(n)}{n} + y(n-1) + \frac{1}{2} t(n-2)$$
+it is concluded that 
+$$x(n)= 1/2n(n - 1),$$
+for $n>0$, and
+$$y(n)= 1/2*(n - 1)^2$$
+for $n>1$.
+
+Finally, substituting this value in \eqref{total_descents} we obtain that the total number of descents is equal to $$n!*n*(n-1)/4$$.
+        
+\end{document}
