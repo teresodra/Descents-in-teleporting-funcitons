@@ -16,4 +16,5 @@ def expected_vs_theoretical(m):
         else:
             print('NOOOOOOOOOOOOOOOOO, it does not work for ' + n + ', ' + str(math.factorial(n)*n*(n-1)/4) + ' is not equal to ' + str(d_in_dtp(n)))
 
-expected_vs_theoretical(1000)
+empirical_vs_theoretical(9)
+expected_vs_theoretical(20)
